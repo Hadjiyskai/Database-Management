@@ -13,7 +13,7 @@ SELECT city, name
 FROM agents;
 
 -- 3. List the pid, name, and price USD of products with quantity more than 208,000
-SELECT pid, name, priceUSD
+SELECT pid, name, priceUSD, quantity
 FROM products
 WHERE quantity > 208000;
 
@@ -25,7 +25,7 @@ WHERE city = 'Dallas';
 -- 5. List the names of agents not in New York and not in Tokyo
 SELECT name
 FROM agents
-WHERE city != 'New York' AND city != 'Tokyo';
+WHERE city NOT IN ('New York', 'Tokyo');
 
 -- 6. List all data for products not in Dallas or Duluth that cost US$1 or more
 SELECT *
