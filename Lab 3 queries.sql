@@ -1,8 +1,4 @@
-/* Iglika Hadjiyska
-Database Management
-Labouseur
-February 7th, 2016
-Lab 3 (Getting Started with SQL queries) */
+
 
 -- 1. List the ordno and dollars of all orders
 SELECT ordnum, totalUSD
@@ -10,7 +6,8 @@ FROM orders;
 
 -- 2. List the name and city of agents named Smith
 SELECT city, name 
-FROM agents;
+FROM agents
+WHERE name = 'Smith';
 
 -- 3. List the pid, name, and price USD of products with quantity more than 208,000
 SELECT pid, name, priceUSD, quantity
@@ -46,5 +43,5 @@ AND totalUSD < 500;
 
 -- 9. List all orders from the customer whose cid is C005
 SELECT *
-FROM customers
+FROM orders
 WHERE cid = 'c005';
