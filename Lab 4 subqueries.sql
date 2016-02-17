@@ -22,10 +22,10 @@ ORDER BY pid DESC;
 
 -- Get the ids and names of customers who did not place an order through agent a01
 SELECT cid, name
-FROM customers 
-WHERE cid IN (SELECT DISTINCT cid
-			  FROM orders
-              WHERE aid NOT IN ('a01'));
+FROM customers
+WHERE cid NOT IN (SELECT DISTINCT cid 
+				  FROM orders
+	              WHERE aid IN ('a01'));
 
 -- Get the ids of customers who ordered both product p01 and p07
 SELECT cid
@@ -34,7 +34,7 @@ WHERE cid IN (SELECT cid
 			  FROM orders 
 			  WHERE pid IN ('p01') AND cid IN (SELECT cid
 											   FROM orders
-											   WHERE pid = 'p07'));
+											   WHERE pid IN ('p07')));
 
 -- Get the ids of products not ordered by any customers who placed any order through agent a07 in pid order from highest to lowest
 SELECT pid
@@ -44,7 +44,7 @@ WHERE cid NOT IN (SELECT cid
 			      WHERE aid IN ('a07'))
 ORDER BY pid DESC;
 
--- Get the name, discounts and city for al customers who placed an order through agents in London or New York
+-- Get the name, discounts and city for all customers who placed an order through agents in London or New York
 SELECT name, discount, city 
 FROM customers
 WHERE cid IN (SELECT cid
