@@ -13,22 +13,22 @@ WHERE aid IN (SELECT aid
 -- Get the ids of products ordered through any agent who takes at least one order from a customer in Dallas, sorted	by pid from highest	to lowest
 SELECT DISTINCT pid
 FROM orders
-WHERE aid IN (SELECT aid 
-			  FROM orders 
-			  WHERE cid IN (SELECT cid
-							FROM customers 
+WHERE aid IN (SELECT DISTINCT aid
+			  FROM orders
+	          WHERE cid IN (SELECT cid
+							FROM customers
 							WHERE city = 'Dallas'))
 ORDER BY pid DESC;
 
 -- Get the ids and names of customers who did not place an order through agent a01
-SELECT cid, name 
-FROM customers
-WHERE cid NOT IN(SELECT DISTINCT cid 
-				 FROM orders 
-				 WHERE aid IN ('a01'));
+SELECT cid, name
+FROM customers 
+WHERE cid IN (SELECT DISTINCT cid
+			  FROM orders
+              WHERE aid NOT IN ('a01'));
 
 -- Get the ids of customers who ordered both product p01 and p07
-ELECT cid
+SELECT cid
 FROM customers
 WHERE cid IN (SELECT cid
 			  FROM orders 
@@ -39,13 +39,13 @@ WHERE cid IN (SELECT cid
 -- Get the ids of products not ordered by any customers who placed any order through agent a07 in pid order from highest to lowest
 SELECT pid
 FROM orders
-WHERE cid IN (SELECT cid
-			  FROM orders
-			  WHERE aid IN ('a07'))
+WHERE cid NOT IN (SELECT cid
+			      FROM orders
+			      WHERE aid IN ('a07'))
 ORDER BY pid DESC;
 
 -- Get the name, discounts and city for al customers who placed an order through agents in London or New York
-SELECT name, discounts, city 
+SELECT name, discount, city 
 FROM customers
 WHERE cid IN (SELECT cid
 			  FROM orders
@@ -58,6 +58,6 @@ London
 SELECT cid
 FROM customers
 WHERE discount IN (SELECT discount
-		   FROM customers
-		   WHERE city IN ('Dallas', 'London'));
+		           FROM customers
+		           WHERE city IN ('Dallas', 'London'));
 
