@@ -12,7 +12,7 @@ ON agents.aid = orders.aid
 WHERE cid = 'c002';
 
 -- ids of products ordered through any agent who takes at least one order from a customers in Dallas, sorted by pid from highest to lowest
-SELECT pid
+SELECT DISTINCT pid
 FROM orders
 INNER JOIN customers
 ON orders.cid = customers.cid
@@ -30,7 +30,7 @@ SELECT name
 FROM customers
 FULL OUTER JOIN orders
 ON customers.cid = orders.cid
-WHERE orders.cid is NULL;
+WHERE orders.ordnum is NULL;
 
 -- names of customers who placed at least one order through an agent in their own city, along with the agent names
 SELECT DISTINCT customers.name, agents.name
