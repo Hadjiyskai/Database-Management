@@ -29,11 +29,6 @@ ON customers.cid = orders.cid
 ORDER BY totalUSD DESC;
 
 -- Display	all	customer	names	(in	alphabetical	order)	and	their	total	ordered,	and	nothing	more.	Use	coalesce	to	avoid	showing	NULL
-select customers.name, coalesce(totalUSD, 0) as totalUSD
-from customers
-FULL OUTER JOIN orders
-ON customers.cid = orders.cid;
-
 select customers.name, coalesce(sum(orders.totalUSD), 0) as "TotalOrdered"
 from customers
 left outer join orders
